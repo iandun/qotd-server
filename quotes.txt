@@ -1,0 +1,8 @@
+"Insanity: doing the same thing over and over again and expecting different results." -Albert Einstein
+"The world is a dangerous place to live; not because of the people who are evil, but because of the people who don't do anything about it." -Albert Einstein
+"Political power grows out of the barrel of a gun." -Mao Zedong
+"Politics is war without bloodshed, while war is politics with bloodshed." -Mao Zedong
+"Most good programmers do programming not because they expect to get paid or get adulation by the public, but because it is fun to program." -Linus Torvalds
+"When you say 'I wrote a program that crashed Windows,' people just stare at you blankly and say 'Hey, I got those with the system, for free.'" -Linus Torvalds
+"At our computer club, we talked about it being a revolution. Computers were going to belong to everyone, and give us power, and free us from the people who owned computers and all that stuff." -Steve Wozniak
+"I had a TV set and a typewriter and that made me think a computer should be laid out like a typewriter with a video screen." -Steve Wozniak 
