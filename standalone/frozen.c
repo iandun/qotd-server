@@ -189,7 +189,7 @@ static struct _frozen _PyImport_FrozenModules[] = {
 	{"_LWPCookieJar", M__LWPCookieJar, 5512},
 	{"_MozillaCookieJar", M__MozillaCookieJar, 4456},
 	{"__future__", M___future__, 4277},
-	{"__main__", M___main__, 2460},
+	{"__main__", M___main__, 4159},
 	{"_abcoll", M__abcoll, 21717},
 	{"_threading_local", M__threading_local, 6578},
 	{"_weakrefset", M__weakrefset, 10182},
