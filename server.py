@@ -1,9 +1,25 @@
 #!/usr/bin/python
 
+#    Quote Of The Day Server Code
+#    Copyright (C) 2013  Ian Duncan
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 2 of the License, or
+#    (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 from socket import *
 from  ConfigParser import *
 import sys
-import argparse
+from optparse import OptionParser
 import random
 import errno
 
@@ -31,7 +47,7 @@ def initConfig(filename):
 		config.write(configfile)
 
 
-def parseConfig(filename):
+def parseConfig(filename, createIfNotExist=True):
 	
 	configOptions = serverConf()
 
@@ -50,6 +66,12 @@ def parseConfig(filename):
 		raise
 
 	except:
+	
+		if createIfNotExist == False:
+
+			print "[Fatal] Configuration file \'" + filename + "\' does not exist. This program must exit."
+			sys.exit()
+			
 		print "[Info] Configuration file \'" + filename + "\' does not exist. Creating one with the default values"
 
 		configOptions.port = 17
@@ -115,13 +137,21 @@ def doCheckQuotesFile(quotesFilename):
 		print "[Fatal] Unable to read quotes file \'" + quotesFilename + "\'. This program must exit"
 		sys.exit()
 
-def Start(args):
+def Start(customFilename):
 
 	filename = "qotdconf.ini"
 
 	doInitMessage()
 
-	configOptions = parseConfig(filename)
+	if customFilename != None:
+
+		filename = customFilename
+		print "[Info] A custom configuration file was specified: " + customFilename
+		configOptions = parseConfig(filename, False)
+
+	else:
+
+		configOptions = parseConfig(filename)
 
 	
 
@@ -156,16 +186,46 @@ def Start(args):
 
 	
 	
+def printLicense(option,opt,value,parser):
 
-parser = argparse.ArgumentParser(description='A quote of the day server.',epilog="Because of a bug, none of the arguments work :/")
-parser.add_argument('--port', dest='accumulate', action='store_const', const=int, default=max, help='the port the server broadcasts on')
-parser.add_argument('--host', dest='accumulate', action='store_const', const=str, default=max, help='the ip address or domain name the server broadcasts on')
-parser.add_argument('--quotes', dest='accumulate', action='store_const', const=str, default=max, help='the file that stores the quotes')
-parser.add_argument('--config', dest='accumulate', action='store_const', const=str, default=max, help='specify a custom configuration file')
 
-args = parser.parse_args()
+	print "Quote Of The Day Server"
+	print "-----------------------"
+	print ""
+	print "This program is free software: you can redistribute it and/or modify"
+ 	
+	print "it under the terms of the GNU General Public License as published by"
+	
+	print "the Free Software Foundation, either version 2 of the License, or"
+	
+	print "(at your option) any later version."
+	
+	print ""
 
-Start(args)
+	print "This program is distributed in the hope that it will be useful,"
+	
+	print "but WITHOUT ANY WARRANTY; without even the implied warranty of"
+	
+	print "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the"
+	
+	print "GNU General Public License for more details."
+
+	print ""
+
+	print "You should have received a copy of the GNU General Public License"
+
+	print "along with this program.  If not, see <http://www.gnu.org/licenses/>."
+
+	sys.exit()
+	
+
+parser = OptionParser(description="A quote of the day server.", version="Quote Of The Day Server\n\nVersion 1.0 By Ian Duncan", )
+parser.add_option("-c", "--config", dest="config", help="specify the path to a custom configuration file",action="store",type="string")
+parser.add_option("-l", "--license", action="callback", callback=printLicense, help="Displays licensing information")
+
+(options,args) = parser.parse_args()
+
+Start(options.config)
 
 
 	
