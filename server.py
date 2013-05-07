@@ -150,6 +150,10 @@ def Start(args):
 	except KeyboardInterrupt as e:
 		raise
 
+	except:
+		print "[Fatal] There was a problem. This program must exit"
+		sys.exit()
+
 	
 	
 
